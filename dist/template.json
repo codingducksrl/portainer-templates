@@ -13,7 +13,6 @@
       "logo": "https://raw.githubusercontent.com/codingducksrl/portainer-templates/main/apps/php/logo.png",
       "repository": {
         "url": "https://github.com/codingducksrl/portainer-templates",
-        "reference": "refs/heads/main",
         "stackfile": "apps/php/docker-compose.yml"
       },
       "env": [
