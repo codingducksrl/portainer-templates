@@ -1,0 +1,50 @@
+version: "3.8"
+services:
+  web:
+    image: gsguglielmo/phpdevelopment
+    # Change the UID and GID to reflect the mounted folder permissions
+    command: ["apache2-foreground", "--user $$USER_UID:$$USER_GID"]
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USERNAME=root
+      - DB_DATABASE=${DATABASE_NAME}
+      - DB_PASSWORD=${DATABASE_PASSWORD}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${PROJECT}.rule=Host(`${PROJECT}.${DOMAIN}.codingduck.it`)
+      # Add public and public-secure to allow access from outside the VPN
+      - traefik.http.routers.${PROJECT}.entrypoints=${ENTRYPOINTS}
+      - traefik.http.routers.${PROJECT}.tls=true
+      # Uncomment this for let's encrypt certificate
+      - traefik.http.routers.${PROJECT}.tls.certresolver=${CERTIFICATE}
+    volumes:
+      - /data/projects/${PROJECT}:/var/www/html/
+  db:
+    image: mariadb
+    restart: unless-stopped
+    volumes:
+      - database-volume:/var/lib/mysql
+      - /databaseDump:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: ${DATABASE_PASSWORD}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${PROJECT}db.rule=Host(`db-${PROJECT}.dev.codingduck.it`)
+      - traefik.http.routers.${PROJECT}db.entrypoints=private,private-secure
+      - traefik.http.routers.${PROJECT}db.tls=true
+
+volumes:
+  database-volume:
