@@ -2,8 +2,8 @@ const fs = require("fs");
 const path = require("path");
 
 const DIST = "dist";
-const GITHUB_REPO_URL = "https://github.com/codingducksrl/dockerimages";
-const GITHUB_BRANCH = "master";
+const GITHUB_REPO_URL = "https://github.com/codingducksrl/portainer-templates";
+const GITHUB_BRANCH = "main";
 
 build();
 
