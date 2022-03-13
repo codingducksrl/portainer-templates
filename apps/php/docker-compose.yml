@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   web:
-    image: gsguglielmo/phpdevelopment
+    image: gsguglielmo/phpdevelopment:8.0.12
     # Change the UID and GID to reflect the mounted folder permissions
     command: ["apache2-foreground", "--user $$USER_UID:$$USER_GID"]
     restart: unless-stopped
