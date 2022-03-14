@@ -1,0 +1,40 @@
+{
+  "type": 3,
+  "title": "PHP 8.0.12 - Local development",
+  "description": "PHP 8.0.12 with MariaDB and PhpMyAdmin",
+  "categories": ["development","php"],
+  "platform": "linux",
+  "logo": "{{GITHUB_REPO_RAW}}/apps/php-local/logo.png",
+  "repository": {
+    "url": "{{GITHUB_REPO}}",
+    "stackfile": "apps/php-local/docker-compose.yml"
+  },
+  "env": [
+    {
+      "name": "USERNAME",
+      "label": "Username",
+      "description": "The username of the user using this instance"
+    },
+    {
+      "name": "PROJECTPATH",
+      "label": "Project path",
+      "description": "The path to the root of the project, starting from the user's home directory."
+    },
+    {
+      "name": "PROJECT",
+      "label": "The name of the project",
+      "description": "The name of the project that will be used to create the Traefik endpoints. Must be URL safe."
+    },
+    {
+      "name": "USER_UID",
+      "label": "UID",
+      "default": "1000",
+      "description": "The UID of the user"
+    },
+    {
+      "name": "USER_GID",
+      "label": "GID",
+      "description": "The GID of the user"
+    }
+  ]
+}
