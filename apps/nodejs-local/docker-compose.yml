@@ -13,7 +13,7 @@ services:
       - DB_PASSWORD=testroot1
       - ENVIRONMENT=dev
     volumes:
-      - .:/app
+      - /home/${USERNAME}/${PROJECTPATH}:/app
     labels:
       - traefik.enable=true
       - traefik.http.routers.${PROJECT}${USERNAME}.rule=Host(`${PROJECT}-${USERNAME}.dev.codingduck.it`)
