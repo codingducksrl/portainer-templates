@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  web:
+    image: gsguglielmo/nodejs
+    command: npm run server:start:debug
+    tty: true
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USERNAME=root
+      - DB_DATABASE=test-db
+      - DB_PASSWORD=testroot1
+      - ENVIRONMENT=dev
+    volumes:
+      - .:/app
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${PROJECT}${USERNAME}.rule=Host(`${PROJECT}-${USERNAME}.dev.codingduck.it`)
+      # Add public and public-secure to allow access from outside the VPN
+      - traefik.http.routers.${PROJECT}${USERNAME}.entrypoints=private,private-secure
+      - traefik.http.routers.${PROJECT}${USERNAME}.tls=true
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - database-cadel:/var/lib/mysql
+      - /databaseDump:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: testroot1
+      MYSQL_DATABASE: "test-db"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: testroot1
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${PROJECT}db${USERNAME}.rule=Host(`db-${PROJECT}-${USERNAME}.dev.codingduck.it`)
+      - traefik.http.routers.${PROJECT}db${USERNAME}.entrypoints=private,private-secure
+      - traefik.http.routers.${PROJECT}db${USERNAME}.tls=true
+
+volumes:
+  database-cadel:
