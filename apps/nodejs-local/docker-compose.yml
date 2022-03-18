@@ -24,7 +24,7 @@ services:
     image: mariadb
     restart: always
     volumes:
-      - database-cadel:/var/lib/mysql
+      - database-volume:/var/lib/mysql
       - /databaseDump:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: testroot1
@@ -44,4 +44,4 @@ services:
       - traefik.http.routers.${PROJECT}db${USERNAME}.tls=true
 
 volumes:
-  database-cadel:
+  database-volume:

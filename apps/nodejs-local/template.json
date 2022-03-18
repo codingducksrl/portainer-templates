@@ -24,17 +24,6 @@
       "name": "PROJECT",
       "label": "The name of the project",
       "description": "The name of the project that will be used to create the Traefik endpoints. Must be URL safe."
-    },
-    {
-      "name": "USER_UID",
-      "label": "UID",
-      "default": "1000",
-      "description": "The UID of the user"
-    },
-    {
-      "name": "USER_GID",
-      "label": "GID",
-      "description": "The GID of the user"
     }
   ]
 }
