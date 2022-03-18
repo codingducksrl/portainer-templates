@@ -1,6 +1,6 @@
 {
   "type": 3,
-  "title": "NodeJS - Local development",
+  "title": "NodeJS",
   "description": "NodeJS with MariaDB and PhpMyAdmin",
   "categories": ["development","nodejs"],
   "platform": "linux",
