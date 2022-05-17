@@ -1,7 +1,7 @@
 {
   "type": 3,
-  "title": "PHP 8.0.12 - Local development",
-  "description": "PHP 8.0.12 with MariaDB and PhpMyAdmin",
+  "title": "PHP 8.1.3 - Local development",
+  "description": "PHP 8.1.3 with MariaDB and PhpMyAdmin",
   "categories": ["development","php"],
   "platform": "linux",
   "logo": "{{GITHUB_REPO_RAW}}/apps/php-local/logo.png",
